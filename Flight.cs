@@ -31,7 +31,7 @@ using ActionMenuDriver = MonoBehaviourPublicObGaObAcCoObMeEmObExUnique;
 using ActionMenuOpener = MonoBehaviourPublicObBoSiObObObUnique;
 using ActionMenuType = MonoBehaviourPublicObBoSiObObObUnique.EnumNPublicSealedvaLeRi3vUnique;
 using HighlightsFX = MonoBehaviour1PublicAbstractObHa1ReShMaObUnique;
-using RoomManager = MonoBehaviourPublicBoApDiApBo2InBoObSiUnique;
+using RoomManager = MonoBehaviourPublicBoApSiApBoObStBo1ObUnique;
 
 [assembly: MelonInfo(typeof(FM), "FlightMod", "1.0.0", "stolen from emm", null)]
 [assembly: MelonGame("VRChat", "VRChat")]
@@ -253,8 +253,7 @@ namespace FlightMod
 
         private static float timer;
 
-        private static string NameplatePath = "Player Nameplate/Canvas/Layout/NameplateGroup/Nameplate/Contents/Main/Text Container/Sub Text/Text";
-
+        private static string NameplatePath = "Contents/Main/Text Container/Sub Text/Text";
         public static void Update()
         {
             if (!FpsEnabled)
@@ -266,17 +265,21 @@ namespace FlightMod
             {
                 timer -= 3f;
                 var playerManager = MonoBehaviourPublicObLi1DiOb2InObGaDiUnique.field_Private_Static_MonoBehaviourPublicObLi1DiOb2InObGaDiUnique_0;
-                foreach (var current in playerManager.field_Private_List_1_MonoBehaviourPublicAPOb_v_pObBo_UBoVRObUnique_0)
+                var nameplateManager = MonoBehaviourPublicOb1BoHaBoLi1ObCoTeUnique.field_Public_Static_MonoBehaviourPublicOb1BoHaBoLi1ObCoTeUnique_0;
+                int i = 0;
+                foreach (var current in playerManager.field_Private_List_1_MonoBehaviourPublicAPOb_vOb_pBo_UObBoVRUnique_0)
                 {
                     short num = current._vrcplayer.prop_Int16_0;
                     byte field_Private_Byte_ = current._playerNet.prop_Byte_0;
                     float num2 = ((field_Private_Byte_ != 0) ? Mathf.Floor(1000f / (float)(int)field_Private_Byte_) : 0f);
                     // MelonLogger.Msg($"{current.Method_Internal_get_APIUser_0().get_displayName()}: {num}ms, {num2}fps");
-                    var gameObject = current.transform.Find(NameplatePath).gameObject;
+                    var currentNameplate = nameplateManager.field_Private_List_1_MonoBehaviourPublicSiInCoSiGaCoTeSiGrCoUnique_0[i];
+                    var gameObject = currentNameplate.transform.Find(NameplatePath).gameObject;
                     gameObject.active = true;
                     var component = gameObject.GetComponent<TextMeshProUGUI>();
                     component.text = $"{num}ms, {num2}fps";
                     component.fontSize = 14f;
+                    i++;
                 }
             }
         }
