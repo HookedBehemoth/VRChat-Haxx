@@ -100,11 +100,11 @@ namespace FlightMod
             }
         }
 
-        private static MonoBehaviour1PublicOb_pOb_c_pStTeObBoStUnique LocalPlayer
+        private static MonoBehaviour1PublicOb_pObGa_pStTeObBoStUnique LocalPlayer
         {
             get
             {
-                return MonoBehaviour1PublicOb_pOb_c_pStTeObBoStUnique.field_Internal_Static_MonoBehaviour1PublicOb_pOb_c_pStTeObBoStUnique_0;
+                return MonoBehaviour1PublicOb_pObGa_pStTeObBoStUnique.field_Internal_Static_MonoBehaviour1PublicOb_pObGa_pStTeObBoStUnique_0;
             }
         }
 
@@ -203,19 +203,28 @@ namespace FlightMod
     {
         public override void OnInitializeMelon()
         {
-            AMUtils.AddToModsFolder("Flight", (Action)delegate
+            AMUtils.AddToModsFolder("Cheats", (Action)delegate
             {
-                CustomSubMenu.AddSubMenu("Teleport", () =>
-            {
-                var self = VRC.SDKBase.VRCPlayerApi.AllPlayers.Find((Il2CppSystem.Predicate<VRC.SDKBase.VRCPlayerApi>)(x => x.isLocal));
-                foreach (var player in VRC.SDKBase.VRCPlayerApi.AllPlayers)
+                CustomSubMenu.AddSubMenu("Player Modifiers", () =>
                 {
-                    CustomSubMenu.AddButton(player.displayName, () =>
+                    var player = Networking.LocalPlayer;
+                    CustomSubMenu.AddRestrictedRadialPuppet("Jump Impulse", (value) => player.SetJumpImpulse(value * 100.0f), player.GetJumpImpulse() / 100.0f);
+                    CustomSubMenu.AddRestrictedRadialPuppet("Run Speed", (value) => player.SetRunSpeed(value * 100.0f), player.GetRunSpeed() / 100.0f);
+                    CustomSubMenu.AddRestrictedRadialPuppet("Walk Speed", (value) => player.SetWalkSpeed(value * 100.0f), player.GetWalkSpeed() / 100.0f);
+                    CustomSubMenu.AddRestrictedRadialPuppet("Strafe Speed", (value) => player.SetStrafeSpeed(value * 100.0f), player.GetStrafeSpeed() / 100.0f);
+                    CustomSubMenu.AddRestrictedRadialPuppet("Gravity Strength", (value) => player.SetGravityStrength(value * 100.0f), player.GetGravityStrength() / 100.0f);
+                });
+                CustomSubMenu.AddSubMenu("Teleport", () =>
+                {
+                    var self = VRC.SDKBase.VRCPlayerApi.AllPlayers.Find((Il2CppSystem.Predicate<VRC.SDKBase.VRCPlayerApi>)(x => x.isLocal));
+                    foreach (var player in VRC.SDKBase.VRCPlayerApi.AllPlayers)
                     {
-                        self.TeleportTo(player.GetPosition(), player.GetRotation());
-                    });
-                }
-            });
+                        CustomSubMenu.AddButton(player.displayName, () =>
+                        {
+                            self.TeleportTo(player.GetPosition(), player.GetRotation());
+                        });
+                    }
+                });
                 CustomSubMenu.AddToggle("Flight", Flight.FlightEnabled, (Action<bool>)delegate (bool state)
                 {
                     Flight.FlightEnabled = state;
@@ -223,12 +232,11 @@ namespace FlightMod
                     {
                         Flight.NoclipEnabled = false;
                     }
-                    AMUtils.RefreshActionMenu();
                 }, (Texture2D)null, false);
                 CustomSubMenu.AddToggle("Noclip", Flight.NoclipEnabled, (Action<bool>)delegate (bool state)
                 {
                     Flight.NoclipEnabled = state;
-                }, (Texture2D)null, !Flight.FlightEnabled);
+                }, (Texture2D)null, false);
                 CustomSubMenu.AddToggle("ESP", ESP.ESPEnabled, (Action<bool>)delegate (bool state)
                 {
                     ESP.ESPEnabled = state;
