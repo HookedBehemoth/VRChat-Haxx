@@ -100,11 +100,11 @@ namespace FlightMod
             }
         }
 
-        private static MonoBehaviour1PublicOb_pObGa_pStTeObBoStUnique LocalPlayer
+        private static MonoBehaviour1PublicOb_pObGa_pStTeObBoSiUnique LocalPlayer
         {
             get
             {
-                return MonoBehaviour1PublicOb_pObGa_pStTeObBoStUnique.field_Internal_Static_MonoBehaviour1PublicOb_pObGa_pStTeObBoStUnique_0;
+                return MonoBehaviour1PublicOb_pObGa_pStTeObBoSiUnique.field_Internal_Static_MonoBehaviour1PublicOb_pObGa_pStTeObBoSiUnique_0;
             }
         }
 
