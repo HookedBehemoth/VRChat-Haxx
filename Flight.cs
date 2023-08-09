@@ -28,8 +28,9 @@ using VRC;
 using VRC.SDKBase;
 
 using ActionMenuDriver = MonoBehaviourPublicObGaObAc1ObAcBoCoObUnique;
-using ActionMenuOpener = MonoBehaviourPublicObAc1BoSiBoObObObUnique;
-using ActionMenuType = MonoBehaviourPublicObAc1BoSiBoObObObUnique.EnumNPublicSealedvaLeRi3vUnique;
+using ActionMenuOpener = MonoBehaviourPublicCaObAc1BoSiBoObObObUnique;
+// using ActionMenuType = MonoBehaviourPublicObAc1BoSiBoObObObUnique.EnumNPublicSealedvaLeRi3vUnique;
+using ActionMenuType = MonoBehaviourPublicCaObAc1BoSiBoObObObUnique.EnumNPublicSealedvaLeRi3vUnique;
 using HighlightsFX = MonoBehaviour1PublicAbstractObHa1ReShMaObUnique;
 using RoomManager = MonoBehaviourPublicBoApSiApBoObStBo1ObUnique;
 
@@ -338,19 +339,19 @@ namespace FlightMod
         public static ActionMenuOpener GetLeftOpener(this ActionMenuDriver actionMenuDriver)
         {
             // var opener = actionMenuDriver.field_Public_MonoBehaviourPublicObBoSiObObObUnique_0;
-            var opener = actionMenuDriver.field_Public_MonoBehaviourPublicObAc1BoSiBoObObObUnique_0;
+            var opener = actionMenuDriver.field_Public_MonoBehaviourPublicCaObAc1BoSiBoObObObUnique_0;
             if (opener.GetActionMenuType() ==
                 ActionMenuType.Left)
                 return opener;
-            return actionMenuDriver.field_Public_MonoBehaviourPublicObAc1BoSiBoObObObUnique_1;
+            return actionMenuDriver.field_Public_MonoBehaviourPublicCaObAc1BoSiBoObObObUnique_1;
         }
 
         public static ActionMenuOpener GetRightOpener(this ActionMenuDriver actionMenuDriver)
         {
-            var opener = actionMenuDriver.field_Public_MonoBehaviourPublicObAc1BoSiBoObObObUnique_1;
+            var opener = actionMenuDriver.field_Public_MonoBehaviourPublicCaObAc1BoSiBoObObObUnique_1;
             if (opener.GetActionMenuType() == ActionMenuType.Right)
                 return opener;
-            return actionMenuDriver.field_Public_MonoBehaviourPublicObAc1BoSiBoObObObUnique_0;
+            return actionMenuDriver.field_Public_MonoBehaviourPublicCaObAc1BoSiBoObObObUnique_0;
         }
 
         public static ActionMenuOpener GetActionMenuOpener()
