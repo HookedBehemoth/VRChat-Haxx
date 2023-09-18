@@ -18,21 +18,17 @@ using System;
 using ActionMenuApi.Api;
 using FlightMod;
 using MelonLoader;
-using TMPro;
-using UnhollowerBaseLib;
-using UnhollowerRuntimeLib.XrefScans;
+using Il2CppTMPro;
 using UnityEngine;
 using UnityEngine.XR;
-using VRC;
-// using VRC.Animation;
-using VRC.SDKBase;
+using Il2CppVRC.SDKBase;
 
-using ActionMenuDriver = MonoBehaviourPublicObGaObAc1ObAcBoCoObUnique;
-using ActionMenuOpener = MonoBehaviourPublicCaObAc1BoSiBoObObObUnique;
-// using ActionMenuType = MonoBehaviourPublicObAc1BoSiBoObObObUnique.EnumNPublicSealedvaLeRi3vUnique;
-using ActionMenuType = MonoBehaviourPublicCaObAc1BoSiBoObObObUnique.EnumNPublicSealedvaLeRi3vUnique;
-using HighlightsFX = MonoBehaviour1PublicAbstractObHa1ReShMaObUnique;
-using RoomManager = MonoBehaviourPublicBoApSiApBoObStBo1ObUnique;
+using ActionMenuDriver = Il2Cpp.MonoBehaviourPublicObGaObAc1ObAcBoCoObUnique;
+using ActionMenuOpener = Il2Cpp.MonoBehaviourPublicCaObAc1BoSiBoObObObUnique;
+using ActionMenuType = Il2Cpp.MonoBehaviourPublicCaObAc1BoSiBoObObObUnique.EnumNPublicSealedvaLeRi3vUnique;
+using HighlightsFX = Il2Cpp.MonoBehaviour1PublicAbstractObHa1ReShMaObUnique;
+using RoomManager = Il2Cpp.MonoBehaviourPublicBoApSiApBoObStBo1ObUnique;
+using Il2CppSystem.Collections.Generic;
 
 [assembly: MelonInfo(typeof(FM), "FlightMod", "1.0.0", "stolen from emm", null)]
 [assembly: MelonGame("VRChat", "VRChat")]
@@ -60,7 +56,7 @@ namespace FlightMod
 
         private static void ApplyState()
         {
-            foreach (GameObject item in (Il2CppArrayBase<GameObject>)GameObject.FindGameObjectsWithTag("Player"))
+            foreach (GameObject item in GameObject.FindGameObjectsWithTag("Player"))
             {
                 Transform val = item.transform.Find("SelectRegion");
                 if (val != null)
@@ -101,11 +97,11 @@ namespace FlightMod
             }
         }
 
-        private static MonoBehaviour1PublicOb_pObGa_pStTeObBoSiUnique LocalPlayer
+        private static Il2Cpp.MonoBehaviour1PublicOb_pObGa_pStTeObBoSiUnique LocalPlayer
         {
             get
             {
-                return MonoBehaviour1PublicOb_pObGa_pStTeObBoSiUnique.field_Internal_Static_MonoBehaviour1PublicOb_pObGa_pStTeObBoSiUnique_0;
+                return Il2Cpp.MonoBehaviour1PublicOb_pObGa_pStTeObBoSiUnique.field_Internal_Static_MonoBehaviour1PublicOb_pObGa_pStTeObBoSiUnique_0;
             }
         }
 
@@ -142,13 +138,13 @@ namespace FlightMod
                     originalGravity = Physics.gravity;
                     Physics.gravity = Vector3.zero;
                 }
-                var val = VRC.SDKBase.VRCPlayerApi.AllPlayers.Find((Il2CppSystem.Predicate<VRC.SDKBase.VRCPlayerApi>)(x => x.isLocal));
+                var val = VRCPlayerApi.AllPlayers.Find((Il2CppSystem.Predicate<VRCPlayerApi>)(x => x.isLocal));
                 if (!val.IsValid())
                 {
                     return;
                 }
                 Vector3 val2 = Vector3.zero;
-                if (XRDevice.isPresent)
+                if (IsXrPresent)
                 {
                     var driver = ActionMenuExtra.GetDriver();
                     float num = Time.deltaTime * val.GetRunSpeed();
@@ -199,34 +195,57 @@ namespace FlightMod
                 originalGravity = Vector3.zero;
             }
         }
+
+        public static bool? _isXrPresent = null;
+
+        public static bool IsXrPresent
+        {
+            get
+            {
+                if (_isXrPresent is bool present) {
+                    return present;
+                }
+
+                var xrDisplaySubsystems = new List<XRDisplaySubsystem>();
+                SubsystemManager.GetInstances(xrDisplaySubsystems);
+                foreach (var xrDisplay in xrDisplaySubsystems)
+                {
+                    if (xrDisplay.running)
+                    {
+                        return (_isXrPresent = true).Value;
+                    }
+                }
+                return (_isXrPresent = false).Value;
+            }
+        }
     }
     public class FM : MelonMod
     {
         public override void OnInitializeMelon()
         {
-            AMUtils.AddToModsFolder("Cheats", (Action)delegate
+            AMUtils.AddToModsFolder("Cheats", menu =>
             {
-                CustomSubMenu.AddSubMenu("Player Modifiers", () =>
+                menu.AddSubMenu("Player Modifiers", menu =>
                 {
                     var player = Networking.LocalPlayer;
-                    CustomSubMenu.AddRestrictedRadialPuppet("Jump Impulse", (value) => player.SetJumpImpulse(value * 100.0f), player.GetJumpImpulse() / 100.0f);
-                    CustomSubMenu.AddRestrictedRadialPuppet("Run Speed", (value) => player.SetRunSpeed(value * 100.0f), player.GetRunSpeed() / 100.0f);
-                    CustomSubMenu.AddRestrictedRadialPuppet("Walk Speed", (value) => player.SetWalkSpeed(value * 100.0f), player.GetWalkSpeed() / 100.0f);
-                    CustomSubMenu.AddRestrictedRadialPuppet("Strafe Speed", (value) => player.SetStrafeSpeed(value * 100.0f), player.GetStrafeSpeed() / 100.0f);
-                    CustomSubMenu.AddRestrictedRadialPuppet("Gravity Strength", (value) => player.SetGravityStrength(value * 100.0f), player.GetGravityStrength() / 100.0f);
+                    menu.AddRestrictedRadialPuppet("Jump Impulse", (value) => player.SetJumpImpulse(value * 100.0f), startingValue: player.GetJumpImpulse() / 100.0f);
+                    menu.AddRestrictedRadialPuppet("Run Speed", (value) => player.SetRunSpeed(value * 100.0f), startingValue: player.GetRunSpeed() / 100.0f);
+                    menu.AddRestrictedRadialPuppet("Walk Speed", (value) => player.SetWalkSpeed(value * 100.0f), startingValue: player.GetWalkSpeed() / 100.0f);
+                    menu.AddRestrictedRadialPuppet("Strafe Speed", (value) => player.SetStrafeSpeed(value * 100.0f), startingValue: player.GetStrafeSpeed() / 100.0f);
+                    menu.AddRestrictedRadialPuppet("Gravity Strength", (value) => player.SetGravityStrength(value * 100.0f), startingValue: player.GetGravityStrength() / 100.0f);
                 });
-                CustomSubMenu.AddSubMenu("Teleport", () =>
+                menu.AddSubMenu("Teleport", menu =>
                 {
-                    var self = VRC.SDKBase.VRCPlayerApi.AllPlayers.Find((Il2CppSystem.Predicate<VRC.SDKBase.VRCPlayerApi>)(x => x.isLocal));
-                    foreach (var player in VRC.SDKBase.VRCPlayerApi.AllPlayers)
+                    var self = VRCPlayerApi.AllPlayers.Find((Il2CppSystem.Predicate<VRCPlayerApi>)(x => x.isLocal));
+                    foreach (var player in VRCPlayerApi.AllPlayers)
                     {
-                        CustomSubMenu.AddButton(player.displayName, () =>
+                        menu.AddButton(player.displayName, () =>
                         {
                             self.TeleportTo(player.GetPosition(), player.GetRotation());
                         });
                     }
                 });
-                CustomSubMenu.AddToggle("Flight", Flight.FlightEnabled, (Action<bool>)delegate (bool state)
+                menu.AddToggle("Flight", Flight.FlightEnabled, (Action<bool>)delegate (bool state)
                 {
                     Flight.FlightEnabled = state;
                     if (!state)
@@ -234,19 +253,10 @@ namespace FlightMod
                         Flight.NoclipEnabled = false;
                     }
                 }, (Texture2D)null, false);
-                CustomSubMenu.AddToggle("Noclip", Flight.NoclipEnabled, (Action<bool>)delegate (bool state)
-                {
-                    Flight.NoclipEnabled = state;
-                }, (Texture2D)null, false);
-                CustomSubMenu.AddToggle("ESP", ESP.ESPEnabled, (Action<bool>)delegate (bool state)
-                {
-                    ESP.ESPEnabled = state;
-                }, (Texture2D)null, false);
-                CustomSubMenu.AddToggle("FPS", PlayerInfo.FpsEnabled, (Action<bool>)delegate (bool state)
-                {
-                    PlayerInfo.FpsEnabled = state;
-                }, (Texture2D)null, false);
-            }, (Texture2D)null, false);
+                menu.AddToggle("Noclip", Flight.NoclipEnabled, state => Flight.NoclipEnabled = state);
+                menu.AddToggle("ESP", ESP.ESPEnabled, state => ESP.ESPEnabled = state);
+                menu.AddToggle("FPS", PlayerInfo.FpsEnabled, state => PlayerInfo.FpsEnabled = state);
+            });
         }
 
         public override void OnUpdate()
@@ -273,8 +283,8 @@ namespace FlightMod
             if (!(timer < 3f))
             {
                 timer -= 3f;
-                var playerManager = MonoBehaviourPublicObLi1DiOb2InObGaDiUnique.field_Private_Static_MonoBehaviourPublicObLi1DiOb2InObGaDiUnique_0;
-                var nameplateManager = MonoBehaviourPublicOb1BoHaBoLi1ObCoTeUnique.field_Public_Static_MonoBehaviourPublicOb1BoHaBoLi1ObCoTeUnique_0;
+                var playerManager = Il2Cpp.MonoBehaviourPublicObLi1DiOb2InObGaDiUnique.field_Private_Static_MonoBehaviourPublicObLi1DiOb2InObGaDiUnique_0;
+                var nameplateManager = Il2Cpp.MonoBehaviourPublicOb1BoHaBoLi1ObCoTeUnique.field_Public_Static_MonoBehaviourPublicOb1BoHaBoLi1ObCoTeUnique_0;
                 int i = 0;
                 foreach (var current in playerManager.field_Private_List_1_MonoBehaviourPublicAPOb_vOb_pBo_UObBoVRUnique_0)
                 {
