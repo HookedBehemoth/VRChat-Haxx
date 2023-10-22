@@ -97,11 +97,11 @@ namespace FlightMod
             }
         }
 
-        private static Il2Cpp.MonoBehaviour1PublicOb_pObBo_pGaStObTeSiUnique LocalPlayer
+        private static Il2Cpp.MonoBehaviour1PublicOb_pObGa_pStTeObBoSiUnique LocalPlayer
         {
             get
             {
-                return Il2Cpp.MonoBehaviour1PublicOb_pObBo_pGaStObTeSiUnique.field_Internal_Static_MonoBehaviour1PublicOb_pObBo_pGaStObTeSiUnique_0;
+                return Il2Cpp.MonoBehaviour1PublicOb_pObGa_pStTeObBoSiUnique.field_Internal_Static_MonoBehaviour1PublicOb_pObGa_pStTeObBoSiUnique_0;
             }
         }
 
