@@ -29,6 +29,7 @@ using ActionMenuType = Il2Cpp.MonoBehaviourPublicCaObAc1BoSiBoObObObUnique.EnumN
 using HighlightsFX = Il2Cpp.MonoBehaviour1PublicAbstractObHa1ReShMaObUnique;
 using RoomManager = Il2Cpp.MonoBehaviourPublicBoApSiApBoObStBo1ObUnique;
 using Il2CppSystem.Collections.Generic;
+using VRCMotionState = Il2Cpp.MonoBehaviourPublicLaSiBoSiChBoObVeBoSiUnique;
 
 [assembly: MelonInfo(typeof(FM), "FlightMod", "1.0.0", "stolen from emm", null)]
 [assembly: MelonGame("VRChat", "VRChat")]
@@ -80,7 +81,7 @@ namespace FlightMod
     {
         public static bool FlightEnabled;
         private static GameObject localPlayer;
-        // private static VRCMotionState motionState;
+        private static VRCMotionState motionState;
         // private static InputStateController stateController;
         private static CharacterController characterController;
         private static Vector3 originalGravity;
@@ -118,10 +119,10 @@ namespace FlightMod
                 {
                     return;
                 }
-                // if (motionState == null)
-                // {
-                //     motionState = localPlayer.GetComponent<VRCMotionState>();
-                // }
+                if (motionState == null)
+                {
+                    motionState = localPlayer.GetComponent<VRCMotionState>();
+                }
                 // if (stateController == null)
                 // {
                 //     stateController = localPlayer.GetComponent<InputStateController>();
@@ -180,10 +181,10 @@ namespace FlightMod
                 {
                     localPlayer.transform.position += new Vector3(0f, val2.y);
                 }
-                // if (motionState != null)
-                // {
-                //     motionState.Reset();
-                // }
+                if (motionState != null)
+                {
+                    motionState.Reset();
+                }
                 // if (stateController != null && !NoclipEnabled)
                 // {
                 //     stateController.ResetLastPosition();
