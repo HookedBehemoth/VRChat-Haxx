@@ -293,7 +293,7 @@ namespace FlightMod
                     byte field_Private_Byte_ = current._playerNet.prop_Byte_0;
                     float num2 = ((field_Private_Byte_ != 0) ? Mathf.Floor(1000f / (float)(int)field_Private_Byte_) : 0f);
                     // MelonLogger.Msg($"{current.Method_Internal_get_APIUser_0().get_displayName()}: {num}ms, {num2}fps");
-                    var currentNameplate = nameplateManager.field_Private_List_1_MonoBehaviourPublicSiInCoSiGaCoTeSiGrCoUnique_0[i];
+                    var currentNameplate = nameplateManager.field_Private_List_1_MonoBehaviourPublicIDisposableSiInCoSiGaCoTeSiGrCoUnique_0[i];
                     var gameObject = currentNameplate.transform.Find(NameplatePath).gameObject;
                     gameObject.active = true;
                     var component = gameObject.GetComponent<TextMeshProUGUI>();
