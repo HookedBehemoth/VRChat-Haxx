@@ -90,6 +90,7 @@ namespace FlightMod
         {
             get
             {
+				new Il2CppBestHTTP.HTTPRequest()
                 return !characterController.enabled;
             }
             set
@@ -98,11 +99,11 @@ namespace FlightMod
             }
         }
 
-        private static Il2Cpp.MonoBehaviour1PublicOb_pObGa_pStTeObBoSiUnique LocalPlayer
+        private static Il2Cpp.MonoBehaviour1PublicOb_pObBo_pGaStObTeSiUnique LocalPlayer
         {
             get
             {
-                return Il2Cpp.MonoBehaviour1PublicOb_pObGa_pStTeObBoSiUnique.field_Internal_Static_MonoBehaviour1PublicOb_pObGa_pStTeObBoSiUnique_0;
+                return Il2Cpp.MonoBehaviour1PublicOb_pObBo_pGaStObTeSiUnique.field_Internal_Static_MonoBehaviour1PublicOb_pObBo_pGaStObTeSiUnique_0;
             }
         }
 
