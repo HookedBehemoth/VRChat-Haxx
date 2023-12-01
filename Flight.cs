@@ -90,7 +90,6 @@ namespace FlightMod
         {
             get
             {
-				new Il2CppBestHTTP.HTTPRequest()
                 return !characterController.enabled;
             }
             set
