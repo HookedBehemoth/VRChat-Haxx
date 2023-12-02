@@ -95,6 +95,10 @@
             <Private>False</Private>
             <SpecificVersion>False</SpecificVersion>
         </Reference>
+        <Reference Include="Il2CppVRCEconomy">
+            <Private>False</Private>
+            <SpecificVersion>False</SpecificVersion>
+        </Reference>
         <!-- Unity -->
         <Reference Include="UnityEngine.CoreModule">
             <Private>False</Private>
