@@ -27,7 +27,7 @@ using ActionMenuDriver = Il2Cpp.MonoBehaviourPublicObGaObAc1ObAcBoCoObUnique;
 using ActionMenuOpener = Il2Cpp.MonoBehaviourPublicCaObAc1BoSiBoObObObUnique;
 using ActionMenuType = Il2Cpp.MonoBehaviourPublicCaObAc1BoSiBoObObObUnique.EnumNPublicSealedvaLeRi3vUnique;
 using HighlightsFX = Il2Cpp.MonoBehaviour1PublicAbstractObHa1ReShMaObUnique;
-using RoomManager = Il2Cpp.MonoBehaviourPublicBoApSiApBoObStBo1ObUnique;
+using RoomManager = Il2Cpp.MonoBehaviourPublicBoApSiApBoObStApBo1Unique;
 using Il2CppSystem.Collections.Generic;
 using VRCMotionState = Il2Cpp.MonoBehaviourPublicLaSiBoSiChBoObVeBoSiUnique;
 
@@ -98,11 +98,11 @@ namespace FlightMod
             }
         }
 
-        private static Il2Cpp.MonoBehaviour1PublicOb_pObBo_pGaStObTeSiUnique LocalPlayer
+        private static Il2Cpp.MonoBehaviour1PublicOb_pOb_s_pBoGaOb_pStUnique LocalPlayer
         {
             get
             {
-                return Il2Cpp.MonoBehaviour1PublicOb_pObBo_pGaStObTeSiUnique.field_Internal_Static_MonoBehaviour1PublicOb_pObBo_pGaStObTeSiUnique_0;
+                return Il2Cpp.MonoBehaviour1PublicOb_pOb_s_pBoGaOb_pStUnique.field_Internal_Static_MonoBehaviour1PublicOb_pOb_s_pBoGaOb_pStUnique_0;
             }
         }
 
@@ -284,7 +284,7 @@ namespace FlightMod
             if (!(timer < 3f))
             {
                 timer -= 3f;
-                var playerManager = Il2Cpp.MonoBehaviourPublicObLi1DiOb2InObGaDiUnique.field_Private_Static_MonoBehaviourPublicObLi1DiOb2InObGaDiUnique_0;
+                var playerManager = Il2Cpp.MonoBehaviourPublicStObStLi1DiOb2InObUnique.field_Private_Static_MonoBehaviourPublicStObStLi1DiOb2InObUnique_0;
                 var nameplateManager = Il2Cpp.MonoBehaviourPublicOb1BoHaBoLi1ObCoTeUnique.field_Public_Static_MonoBehaviourPublicOb1BoHaBoLi1ObCoTeUnique_0;
                 int i = 0;
                 foreach (var current in playerManager.field_Private_List_1_MonoBehaviourPublicAPOb_vOb_pBo_UObBoVRUnique_0)
@@ -293,7 +293,7 @@ namespace FlightMod
                     byte field_Private_Byte_ = current._playerNet.prop_Byte_0;
                     float num2 = ((field_Private_Byte_ != 0) ? Mathf.Floor(1000f / (float)(int)field_Private_Byte_) : 0f);
                     // MelonLogger.Msg($"{current.Method_Internal_get_APIUser_0().get_displayName()}: {num}ms, {num2}fps");
-                    var currentNameplate = nameplateManager.field_Private_List_1_MonoBehaviourPublicIDisposableSiInCoSiGaCoTeSiGrCoUnique_0[i];
+                    var currentNameplate = nameplateManager.field_Private_List_1_MonoBehaviourPublicIDisposableSiInCoSiGaCoObSiGrCoUnique_0[i];
                     var gameObject = currentNameplate.transform.Find(NameplatePath).gameObject;
                     gameObject.active = true;
                     var component = gameObject.GetComponent<TextMeshProUGUI>();
