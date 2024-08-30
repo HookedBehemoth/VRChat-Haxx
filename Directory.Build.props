@@ -99,6 +99,26 @@
             <Private>False</Private>
             <SpecificVersion>False</SpecificVersion>
         </Reference>
+        <Reference Include="Il2CppDataModel">
+            <Private>False</Private>
+            <SpecificVersion>False</SpecificVersion>
+        </Reference>
+        <Reference Include="Il2CppVRC.Udon.Common">
+            <Private>False</Private>
+            <SpecificVersion>False</SpecificVersion>
+        </Reference>
+        <Reference Include="Il2CppVRC.Udon.VRCWrapperModules">
+            <Private>False</Private>
+            <SpecificVersion>False</SpecificVersion>
+        </Reference>
+        <Reference Include="Il2CppVRC.Udon.Wrapper">
+            <Private>False</Private>
+            <SpecificVersion>False</SpecificVersion>
+        </Reference>
+        <Reference Include="Il2CppVRC.Udon">
+            <Private>False</Private>
+            <SpecificVersion>False</SpecificVersion>
+        </Reference>
         <!-- Unity -->
         <Reference Include="UnityEngine.CoreModule">
             <Private>False</Private>

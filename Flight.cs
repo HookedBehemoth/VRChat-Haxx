@@ -26,7 +26,7 @@ using Il2CppVRC.SDKBase;
 using ActionMenuDriver = Il2Cpp.MonoBehaviourPublicObGaObAc1ObAcBoCoObUnique;
 using ActionMenuOpener = Il2Cpp.MonoBehaviourPublicCaObAc1BoSiBoObObObUnique;
 using ActionMenuType = Il2Cpp.MonoBehaviourPublicCaObAc1BoSiBoObObObUnique.EnumNPublicSealedvaLeRi3vUnique;
-using HighlightsFX = Il2Cpp.MonoBehaviour1PublicAbstractObHa1ReShMaObUnique;
+using SelectedOutline = Il2Cpp.MonoBehaviourPublicInLi1MeHaInMeRe1MeUnique;
 using RoomManager = Il2Cpp.MonoBehaviourPublicBoApSiApBoObStApBo1Unique;
 using Il2CppSystem.Collections.Generic;
 using VRCMotionState = Il2Cpp.MonoBehaviourPublicLaSiBoSiChBoObVeBoSiUnique;
@@ -57,12 +57,14 @@ namespace FlightMod
 
         private static void ApplyState()
         {
-            foreach (GameObject item in GameObject.FindGameObjectsWithTag("Player"))
+            var playerManager = Il2Cpp.MonoBehaviourPublicStObStLi1DiOb2InObUnique.field_Private_Static_MonoBehaviourPublicStObStLi1DiOb2InObUnique_0;
+            foreach (var current in playerManager.field_Private_List_1_MonoBehaviourPublicAPOb_vOb_pBo_UObBoVRUnique_0)
             {
-                Transform val = item.transform.Find("SelectRegion");
+                Transform val = current.transform.Find("SelectRegion");
                 if (val != null)
                 {
-                    HighlightsFX.prop_MonoBehaviour1PublicAbstractObHa1ReShMaObUnique_0.Method_Public_Void_Renderer_Boolean_0(val.GetComponent<Renderer>(), _ESPEnabled);
+                    var renderer = val.GetComponent<Renderer>();
+                    SelectedOutline.Method_Internal_Static_Void_Renderer_Boolean_PDM_0(renderer, _ESPEnabled);
                 }
             }
         }
@@ -222,10 +224,23 @@ namespace FlightMod
     }
     public class FM : MelonMod
     {
+        public override void OnSceneWasUnloaded(int buildIndex, string sceneName)
+        {
+            EconomyUdonBehaviourPath.OnLeavingWorld();
+        }
         public override void OnInitializeMelon()
         {
+            HarmonyInstance.PatchAll();
+            // HarmonyInstance.PatchAll(typeof(EconomyListPurchasesPatch));
+            // HarmonyInstance.PatchAll(typeof(EconomyDoesAnyPlayerOwnProductPatch));
+            // HarmonyInstance.PatchAll(typeof(EconomyDoesPlayerOwnProductPatch));
+            // HarmonyInstance.PatchAll(typeof(EconomyGetPlayersWhoOwnProductPatch));
+            // HarmonyInstance.PatchAll(typeof(EconomyListProductOwnersPatch));
+            // Helper.Patch();
+            // ClassInjector.RegisterTypeInIl2Cpp<EconomyHaxx.UdonProductStub>(new RegisterTypeOptions { Interfaces = new[] { typeof(IProduct) } }); 
             AMUtils.AddToModsFolder("Cheats", menu =>
             {
+                menu.AddButton("Purchase all", EconomyUdonBehaviourPath.PurchaseAll);
                 menu.AddSubMenu("Player Modifiers", menu =>
                 {
                     var player = Networking.LocalPlayer;
